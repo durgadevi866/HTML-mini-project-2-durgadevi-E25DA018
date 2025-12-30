@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#0e1726; --card:#1f2a44; --accent:#6ee7b7; --text:#e5e7eb; --muted:#94a3b8; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:var(--bg); color:var(--text); display:flex; min-height:100vh; align-items:center; justify-content:center; }
+    .card { width:100%; max-width:420px; background:var(--card); border-radius:14px; padding:28px; box-shadow:0 10px 30px rgba(0,0,0,0.35); }
+    h1 { margin:0 0 8px; font-size:1.6rem; }
+    p.sub { margin:0 0 18px; color:var(--muted); }
+    label { display:block; font-size:0.9rem; margin:14px 0 6px; }
+    input { width:100%; padding:12px 14px; border-radius:10px; border:1px solid #334155; background:#0b1220; color:var(--text); outline:none; }
+    input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(110,231,183,0.2); }
+    .row { display:flex; gap:12px; }
+    .row > div { flex:1; }
+    button { margin-top:18px; width:100%; padding:12px; border:0; border-radius:10px; background:var(--accent); color:#0b1220; font-weight:700; cursor:pointer; }
+    .foot { margin-top:14px; font-size:0.9rem; color:var(--muted); }
+    .error { margin-top:10px; color:#fca5a5; font-size:0.9rem; display:none; }
+    a { color:var(--accent); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Create your account</h1>
+    <p class="sub">Sign up to continue and see your personalized welcome.</p>
+
+    <form id="signupForm" novalidate>
+      <label for="name">Full name</label>
+      <input id="name" name="name" type="text" placeholder="Suganya Priya" required />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" placeholder="At least 8 characters" minlength="8" required />
+
+      <button type="submit">Sign up</button>
+      <div id="error" class="error">Please fill out all fields correctly.</div>
+    </form>
+
+    <p class="foot">Already have an account? <a href="welcome.html">Go to Welcome</a></p>
+  </main>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const errorEl = document.getElementById('error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorEl.style.display = 'none';
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+
+      const valid =
+        name.length >= 2 &&
+        /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) &&
+        password.length >= 8;
+
+      if (!valid) {
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      localStorage.setItem('userName', name);
+      localStorage.setItem('userEmail', email);
+      // Never store plaintext passwords in production; this is a demo only.
+      localStorage.setItem('isLoggedIn', 'true');
+
+      window.location.href = 'welcome.html';
+    });
+  </script>
+</body>
+</html>
