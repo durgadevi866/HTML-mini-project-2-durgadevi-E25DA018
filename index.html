@@ -13,12 +13,10 @@
     label { display:block; font-size:0.9rem; margin:14px 0 6px; }
     input { width:100%; padding:12px 14px; border-radius:10px; border:1px solid #334155; background:#0b1220; color:var(--text); outline:none; }
     input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(110,231,183,0.2); }
-    .row { display:flex; gap:12px; }
-    .row > div { flex:1; }
     button { margin-top:18px; width:100%; padding:12px; border:0; border-radius:10px; background:var(--accent); color:#0b1220; font-weight:700; cursor:pointer; }
-    .foot { margin-top:14px; font-size:0.9rem; color:var(--muted); }
-    .error { margin-top:10px; color:#fca5a5; font-size:0.9rem; display:none; }
+    .foot { margin-top:14px; font-size:0.9rem; color:var(--muted); text-align:center; }
     a { color:var(--accent); text-decoration:none; }
+    .error { margin-top:10px; color:#fca5a5; font-size:0.9rem; display:none; }
   </style>
 </head>
 <body>
@@ -27,7 +25,7 @@
     <p class="sub">Sign up to continue and see your personalized welcome.</p>
 
     <form id="signupForm" novalidate>
-      <label for="name">Full name</label>
+      <label for="name">Full Name</label>
       <input id="name" name="name" type="text" placeholder="Suganya Priya" required />
 
       <label for="email">Email</label>
@@ -40,6 +38,7 @@
       <div id="error" class="error">Please fill out all fields correctly.</div>
     </form>
 
+    <!-- Updated Link to Welcome Page -->
     <p class="foot">Already have an account? <a href="welcome.html">Go to Welcome</a></p>
   </main>
 
@@ -65,11 +64,12 @@
         return;
       }
 
+      // Save user data locally
       localStorage.setItem('userName', name);
       localStorage.setItem('userEmail', email);
-      // Never store plaintext passwords in production; this is a demo only.
       localStorage.setItem('isLoggedIn', 'true');
 
+      // Redirect to welcome page
       window.location.href = 'welcome.html';
     });
   </script>
